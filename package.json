@@ -8,7 +8,8 @@
     "browser-list": "./browser-list.sh",
     "npm-all-the-things": "./npm-all-the-things.sh",
     "npmd-all-the-things": "./npmd-all-the-things.sh",
-    "dirtygit": "./dirtygit.sh"
+    "dirtygit": "./dirtygit.sh",
+    "os-family": "./os-family.sh"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

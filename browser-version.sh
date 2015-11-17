@@ -11,16 +11,20 @@ extractFirefoxVersion() {
 }
 
 getChromeVersion() {
+  CHROMEOS=`OS_DEFAULT=linux ./os-family.sh`
   case $1 in
     unstable)
-      VERSION=`curl -s http://omahaproxy.appspot.com/all | grep ^linux\,dev | cut -d',' -f3`
+      VERSION=`curl -s http://omahaproxy.appspot.com/all | grep ^$CHROMEOS\,dev | cut -d',' -f3`
       ;;
     *)
-      VERSION=`curl -s http://omahaproxy.appspot.com/all | grep ^linux\,$1 | cut -d',' -f3`
+      VERSION=`curl -s http://omahaproxy.appspot.com/all | grep ^$CHROMEOS\,$1 | cut -d',' -f3`
       ;;
   esac
   
-  echo "chrome|$1|$VERSION|https://dl.google.com/linux/direct/google-chrome-$1_current_amd64.deb"
+  case $CHROMEOS in
+    mac) echo "chrome|$1|$VERSION|https://dl.google.com/chrome/mac/$1/GGRO/googlechrome.dmg";;
+    linux) echo "chrome|$1|$VERSION|https://dl.google.com/linux/direct/google-chrome-$1_current_amd64.deb";;
+  esac
 }
 
 getFirefoxVersion() {
